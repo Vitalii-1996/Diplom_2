@@ -79,4 +79,3 @@ class TestAuthUser:
         status_code, response = auth_api.patch_user(auth_data, user_payload)
         assert status_code == 401
         assert response.get('message') == AUTH_ERROR_MESSAGE
-

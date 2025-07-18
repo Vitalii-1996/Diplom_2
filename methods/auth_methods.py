@@ -50,4 +50,12 @@ class AuthMethods:
             return response.status_code, response.json()
         except JSONDecodeError:
             return response.status_code, response.text
-        
+    
+    def post_logout_user(self, params):
+        response = requests.post(
+            f'{BASE_URL}{AUTH_URL}logout', json=params
+        )
+        try:
+            return response.status_code, response.json()
+        except JSONDecodeError:
+            return response.status_code, response.text
