@@ -1,11 +1,14 @@
 import pytest
+import random
+import allure
 from data import KNOWN_INGREDIENT_HASH
 from methods.order_methods import OrderMethods
 from helpers import generate_random_string
-import random
 
 
 class TestOrders:
+    @allure.title('Test create new order.')
+    @allure.description('Test create new order with and withouth auth.')
     @pytest.mark.parametrize(
         "use_auth, order_id_present",
         [
@@ -28,6 +31,12 @@ class TestOrders:
         assert status_code == 200
         assert ('_id' in response.get('order')) == order_id_present 
 
+    @allure.title('Test create order with various ingredients.')
+    @allure.description(
+        '1. Create order with valid ingredient hash.'
+        '2. Create order without igredient hash.'
+        '3. Create order with random ingredient hash.'
+    )
     @pytest.mark.parametrize(
         "ingredient, expected_status_code",
         [
@@ -48,6 +57,8 @@ class TestOrders:
 
         assert status_code == expected_status_code
 
+    @allure.title('Test get user auth.')
+    @allure.description('Test the get user response with and without auth.')
     @pytest.mark.parametrize(
         "use_auth, expected_status",
         [

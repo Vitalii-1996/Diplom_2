@@ -1,5 +1,6 @@
 import random
 import string
+import allure
 
 
 def generate_random_string(length):
@@ -10,6 +11,7 @@ def generate_random_string(length):
 def generate_random_email():
     return f'{generate_random_string(8)}@{generate_random_string(4)}.{generate_random_string(3)}'
 
+@allure.step('generate random user payload')
 def generate_random_user_payload():
     email = generate_random_email()
     password = generate_random_string(10)
